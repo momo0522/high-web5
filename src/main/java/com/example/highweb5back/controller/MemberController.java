@@ -4,6 +4,7 @@ import com.example.highweb5back.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-    @PostMapping("/counselor")
-    public ResponseEntity<String> makeCounselor(){
-        return ResponseEntity.ok(memberService.makeCounselor());
+
+    @PutMapping("/counselor")
+    public ResponseEntity<String> loginCounselor(){
+        return ResponseEntity.ok(memberService.loginCounselor());
     }
     @PostMapping("/client")
     public ResponseEntity<String> makeClient(){

@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,5 +19,5 @@ public class Member {
     private Long id;
     private String name;
     private Type type;
-
+    private LocalDateTime lastLogin;
 }

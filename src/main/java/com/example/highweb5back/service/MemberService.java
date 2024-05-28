@@ -6,13 +6,20 @@ import com.example.highweb5back.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-    public String makeCounselor(){
-        memberRepository.save(createCounselor());
-        return "상담사 생성 완료";
+    public String loginCounselor(){
+        Member counselor;
+        Optional<Member> counselorOp = memberRepository.findByType(Type.COUNSELOR);
+        counselor = counselorOp.orElseGet(this::createCounselor);
+        counselor.setLastLogin(LocalDateTime.now());
+        memberRepository.save(counselor);
+        return "상담사 로그인 완료";
     }
 
     public String makeClient(){
