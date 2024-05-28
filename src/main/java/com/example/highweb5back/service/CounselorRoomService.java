@@ -24,7 +24,8 @@ public class CounselorRoomService {
 
     public Long makeRoom(CounselorRoomRequestDto dto){
         Member client = memberRepository.findById(dto.getClientId()).orElseThrow();
-        Member counselor = memberRepository.findByType(Type.COUNSELOR).orElseThrow();
+        Member counselor = memberRepository.findByType(Type.COUNSELOR).get(0);
+
         CounselorRoom room = new CounselorRoom(counselor, client);
         counselorRoomRepository.save(room);
         return room.getId();
