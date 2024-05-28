@@ -1,18 +1,21 @@
 package com.example.highweb5back.controller;
 
+import com.example.highweb5back.dto.CounselorStatResponseDto;
 import com.example.highweb5back.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+
+    @GetMapping("/counselor")
+    public ResponseEntity<CounselorStatResponseDto> getCounselorStat(){
+        return ResponseEntity.ok(memberService.getCounselorStat());
+    }
 
     @PutMapping("/counselor")
     public ResponseEntity<String> loginCounselor(){
