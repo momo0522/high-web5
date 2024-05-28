@@ -3,7 +3,6 @@ package com.example.highweb5back.service;
 import com.example.highweb5back.domain.Member;
 import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.MessageRequestDto;
-import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.repository.MemberRepository;
 import com.example.highweb5back.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +14,12 @@ public class MessageService {
     private final MemberRepository memberRepository;
     private final MessageRepository messageRepository;
 
-    public MessageResponseDto saveAndReturnMessage(MessageRequestDto dto){
-        Message message = dto.toDomain();
-        messageRepository.save(message);
-
+    public Message saveAndReturnMessage(MessageRequestDto dto){
         Member member = memberRepository
                 .findById(dto.getSenderId())
                 .orElseThrow();
-        return new MessageResponseDto(message, member.getType());
+        Message message = dto.toDomain(member.getType());
+        messageRepository.save(message);
+        return message;
     }
 }

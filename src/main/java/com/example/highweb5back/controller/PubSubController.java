@@ -1,9 +1,7 @@
 package com.example.highweb5back.controller;
 
-import com.example.highweb5back.domain.Member;
+import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.MessageRequestDto;
-import com.example.highweb5back.dto.MessageResponseDto;
-import com.example.highweb5back.repository.MemberRepository;
 import com.example.highweb5back.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -20,11 +18,7 @@ public class PubSubController {
 
     @MessageMapping(value = "/message")
     public void sendMessage(MessageRequestDto dto) {
-        MessageResponseDto messageResponseDto = messageService.saveAndReturnMessage( dto);
-        template.convertAndSend(
-                "/sub/room/" +
-                        dto.getRoomId(),
-                        messageResponseDto
-        );
+        Message message = messageService.saveAndReturnMessage(dto);
+        template.convertAndSend("/sub/room/" + dto.getRoomId(), message);
     }
 }
