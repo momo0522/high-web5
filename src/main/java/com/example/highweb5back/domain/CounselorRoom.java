@@ -11,12 +11,14 @@ public class CounselorRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToOne
     @JoinColumn(name="client_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Client client;
+    private Member client;
+
     @OneToOne
     @JoinColumn(name="counselor_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Counselor counselor;
+    private Member counselor;
 }
