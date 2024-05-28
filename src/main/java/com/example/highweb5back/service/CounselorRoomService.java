@@ -32,8 +32,10 @@ public class CounselorRoomService {
     }
 
     public List<CounselorRoomResponseDto> getRoomList(){
+        Member counselor = memberRepository.findByType(Type.COUNSELOR).get(0);
+        List<CounselorRoom> counselorRoomList = counselorRoomRepository.findByCounselorId(counselor.getId());
+
         ArrayList<CounselorRoomResponseDto> resultList = new ArrayList<>();
-        List<CounselorRoom> counselorRoomList = counselorRoomRepository.findByCounselorId(1L);
         for(CounselorRoom counselorRoom: counselorRoomList){
             resultList.add(new CounselorRoomResponseDto(counselorRoom));
         }
