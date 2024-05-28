@@ -19,7 +19,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.loginCounselor());
     }
     @PostMapping("/client")
-    public ResponseEntity<String> makeClient(){
+    public ResponseEntity<Long> makeClient(){
         return ResponseEntity.ok(memberService.makeClient());
     }
 }

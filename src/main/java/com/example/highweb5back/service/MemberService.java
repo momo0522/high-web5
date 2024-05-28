@@ -22,9 +22,10 @@ public class MemberService {
         return "상담사 로그인 완료";
     }
 
-    public String makeClient(){
-        memberRepository.save(createClient());
-        return "상담사 생성 완료";
+    public Long makeClient(){
+        Member client = createClient();
+        memberRepository.save(client);
+        return client.getId();
     }
 
     Member createCounselor(){
