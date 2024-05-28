@@ -19,7 +19,7 @@ public class CounselorRoom {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member client;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="counselor_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member counselor;

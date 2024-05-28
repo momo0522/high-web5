@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class CounselorRoomRequestDto {
-    private Long counselorId;
     private Long clientId;
 }
