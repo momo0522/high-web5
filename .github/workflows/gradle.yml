@@ -1,0 +1,52 @@
+name: Build and Push Docker Image main branch
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  update-docker-image-push-to-hub:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    # set up java
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # set up application file
+    - name: Create application.properties
+      run: |
+        mkdir -p ./src/main/resources
+        cd ./src/main/resources
+        echo "${{ secrets.APPLICATION }}" >> ./application.properties
+
+    # gradle grant execution permission and build project
+    - name: Setup Gradle
+      run: |
+        chmod +x ./gradlew
+        ./gradlew clean build
+
+    # login dockerhub
+    - name: docker login
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    # build Docker image
+    - name: docker image build
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }} .
+
+    # push docker image
+    - name: docker Hub push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
