@@ -45,8 +45,8 @@ jobs:
 
     # build Docker image
     - name: docker image build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/high-web5-back .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }} .
 
     # push docker image
     - name: docker Hub push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/high-web5-back
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
