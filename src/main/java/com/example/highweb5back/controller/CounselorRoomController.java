@@ -28,7 +28,7 @@ public class CounselorRoomController {
         return ResponseEntity.ok(counselorRoomService.getRoomList());
     }
 
-    @GetMapping("/message/{roomId}")
+    @GetMapping("/{roomId}")
     public ResponseEntity<List<Message>> getRoomMessage(
             @PathVariable("roomId") Long roomId
     ){
