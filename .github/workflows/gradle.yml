@@ -29,7 +29,17 @@ jobs:
         mkdir -p ./src/main/resources
         cd ./src/main/resources
         echo "${{ secrets.APPLICATION }}" >> ./application.properties
-
+        
+      # set up mysql
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        host port: 3306
+        container port: 3306
+        mysql database: 'testdb'
+        mysql user: 'test'
+        mysql password: 'test'
+        
     # gradle grant execution permission and build project
     - name: Setup Gradle
       run: |
