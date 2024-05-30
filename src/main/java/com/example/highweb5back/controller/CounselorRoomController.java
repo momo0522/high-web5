@@ -16,6 +16,11 @@ import java.util.List;
 public class CounselorRoomController {
     private final CounselorRoomService counselorRoomService;
 
+    @PutMapping("")
+    public ResponseEntity<Long> requestEnterRoom(){
+        return ResponseEntity.ok(counselorRoomService.enterRoom());
+    }
+
     @PostMapping("")
     public ResponseEntity<Long> makeRoom(
             @RequestBody CounselorRoomRequestDto dto

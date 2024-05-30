@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +24,22 @@ public class CounselorRoomService {
     private final CounselorRoomRepository counselorRoomRepository;
     private final MemberRepository memberRepository;
 
+    public Long enterRoom(){
+        Optional<CounselorRoom> roomOp = counselorRoomRepository.findTopByOrderByIdDesc();
+        return roomOp.isEmpty() ? -1 : roomOp.get().getId();
+    }
+
     public Long makeRoom(CounselorRoomRequestDto dto){
         Member client = memberRepository.findById(dto.getClientId()).orElseThrow();
         Member counselor = memberRepository.findByType(Type.COUNSELOR).get(0);
+        Optional<CounselorRoom> room = counselorRoomRepository.findByClientId(dto.getClientId());
 
-        CounselorRoom room = new CounselorRoom(counselor, client);
-        counselorRoomRepository.save(room);
-        return room.getId();
+        if(room.isEmpty()){
+            CounselorRoom newRoom = new CounselorRoom(counselor, client);
+            counselorRoomRepository.save(newRoom);
+            return newRoom.getId();
+        }
+        return room.get().getId();
     }
 
     public List<CounselorRoomResponseDto> getRoomList(){
