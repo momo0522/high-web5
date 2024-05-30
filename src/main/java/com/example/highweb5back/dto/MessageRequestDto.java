@@ -3,7 +3,6 @@ package com.example.highweb5back.dto;
 import com.example.highweb5back.domain.CounselorRoom;
 import com.example.highweb5back.domain.Member;
 import com.example.highweb5back.domain.Message;
-import com.example.highweb5back.enums.Type;
 import lombok.Data;
 
 import java.time.LocalDateTime;

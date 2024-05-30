@@ -1,6 +1,5 @@
 package com.example.highweb5back.controller;
 
-import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.MessageRequestDto;
 import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.service.MessageService;

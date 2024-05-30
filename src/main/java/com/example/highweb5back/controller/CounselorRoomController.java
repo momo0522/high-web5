@@ -1,6 +1,5 @@
 package com.example.highweb5back.controller;
 
-import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.CounselorRoomRequestDto;
 import com.example.highweb5back.dto.CounselorRoomResponseDto;
 import com.example.highweb5back.dto.MessageResponseDto;
