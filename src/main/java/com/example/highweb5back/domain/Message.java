@@ -1,5 +1,6 @@
 package com.example.highweb5back.domain;
 
+import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.enums.Type;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,18 @@ public class Message {
     private CounselorRoom counselorRoom;
 
     private String content;
+    private String sender;
     private Type type;
     private LocalDateTime createdTime;
+
+    public MessageResponseDto toDto(){
+        return MessageResponseDto.builder()
+                .roomId(counselorRoom.getId())
+                .sender(sender)
+                .id(id)
+                .content(content)
+                .type(type.name())
+                .createdTime(createdTime)
+                .build();
+    }
 }

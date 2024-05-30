@@ -5,6 +5,7 @@ import com.example.highweb5back.domain.Member;
 import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.CounselorRoomRequestDto;
 import com.example.highweb5back.dto.CounselorRoomResponseDto;
+import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.enums.Type;
 import com.example.highweb5back.repository.CounselorRoomRepository;
 import com.example.highweb5back.repository.MemberRepository;
@@ -42,9 +43,14 @@ public class CounselorRoomService {
         return resultList;
     }
 
-    public List<Message> getRoomMessage(Long roomId){
+    public ArrayList<MessageResponseDto> getRoomMessage(Long roomId){
         CounselorRoom room = counselorRoomRepository.findById(roomId).orElseThrow();
-        return messageRepository.findByCounselorRoom(room);
+        ArrayList<MessageResponseDto> list = new ArrayList<>();
+        for(Message message: messageRepository.findByCounselorRoom(room)){
+            list.add(message.toDto());
+        }
+
+        return list;
     }
 
 }

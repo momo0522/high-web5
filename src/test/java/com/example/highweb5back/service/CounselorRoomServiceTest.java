@@ -4,6 +4,7 @@ import com.example.highweb5back.domain.CounselorRoom;
 import com.example.highweb5back.domain.Member;
 import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.MessageRequestDto;
+import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.enums.Type;
 import com.example.highweb5back.repository.CounselorRoomRepository;
 import com.example.highweb5back.repository.MemberRepository;
@@ -50,7 +51,7 @@ public class CounselorRoomServiceTest {
         counselor = createCounselor();
         counselorRoom = new CounselorRoom(counselor, client);
         messageDto = createMessageDto(counselorRoom.getId(), client.getId());
-        message = messageDto.toDomain(client.getType());
+        message = messageDto.toDomain(counselorRoom, client);
         list = new ArrayList<>();
         list.add(message);
 
@@ -66,7 +67,7 @@ public class CounselorRoomServiceTest {
     void getRoomMessage(){
 
 
-        List<Message> result = counselorRoomService.getRoomMessage(counselorRoom.getId());
+        List<MessageResponseDto> result = counselorRoomService.getRoomMessage(counselorRoom.getId());
         assertThat(result.get(0).getContent()).isEqualTo(message.getContent());
     }
 

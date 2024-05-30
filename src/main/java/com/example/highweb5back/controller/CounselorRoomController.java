@@ -3,6 +3,7 @@ package com.example.highweb5back.controller;
 import com.example.highweb5back.domain.Message;
 import com.example.highweb5back.dto.CounselorRoomRequestDto;
 import com.example.highweb5back.dto.CounselorRoomResponseDto;
+import com.example.highweb5back.dto.MessageResponseDto;
 import com.example.highweb5back.service.CounselorRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class CounselorRoomController {
     }
 
     @GetMapping("/{roomId}")
-    public ResponseEntity<List<Message>> getRoomMessage(
+    public ResponseEntity<List<MessageResponseDto>> getRoomMessage(
             @PathVariable("roomId") Long roomId
     ){
         return ResponseEntity.ok(counselorRoomService.getRoomMessage(roomId));
