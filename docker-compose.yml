@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    image: ${DOCKER_USERNAME}/${DOCKER_IMAGE}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/webdb
+      SPRING_DATASOURCE_USERNAME: highweb
+      SPRING_DATASOURCE_PASSWORD: highweb
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: highweb
+      MYSQL_DATABASE: webdb
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
+
