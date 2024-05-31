@@ -10,7 +10,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/webdb
       SPRING_DATASOURCE_USERNAME: highweb
       SPRING_DATASOURCE_PASSWORD: highweb
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
   db:
     image: mysql:latest
     environment:
