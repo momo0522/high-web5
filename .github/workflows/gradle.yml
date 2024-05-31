@@ -43,9 +43,9 @@ jobs:
       with:
         host port: 3306
         container port: 3306
-        mysql database: 'testdb'
-        mysql user: 'test'
-        mysql password: 'test'
+        mysql database: 'webdb'
+        mysql user: 'highweb'
+        mysql password: 'highweb'
         
     # gradle grant execution permission and build project
     - name: Setup Gradle
