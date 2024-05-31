@@ -16,6 +16,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: highweb
       MYSQL_DATABASE: webdb
+      MYSQL_USER: highweb
+      MYSQL_PASSWORD: highweb
     volumes:
       - db_data:/var/lib/mysql
 volumes:
