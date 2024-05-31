@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequiredArgsConstructor
 @CrossOrigin
 public class PubSubController {
-    private final SimpMessagingTemplate template;
     private final MessageService messageService;
 
     @MessageMapping(value = "/message")
     public void sendMessage(MessageRequestDto dto) {
-        MessageResponseDto message = messageService.saveAndReturnMessage(dto);
-        template.convertAndSend("/sub/room/" + dto.getRoomId(), message);
+        messageService.saveAndSendMessage(dto);
+    }
+
+    @MessageMapping("/start-new-session")
+    public void startNewSession(Long clientId) {
+        messageService.createNewChatSession(clientId);
     }
 }

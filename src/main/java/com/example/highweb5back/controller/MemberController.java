@@ -18,7 +18,7 @@ public class MemberController {
     }
 
     @PutMapping("/counselor")
-    public ResponseEntity<String> loginCounselor(){
+    public ResponseEntity<Long> loginCounselor(){
         return ResponseEntity.ok(memberService.loginCounselor());
     }
     @PostMapping("/client")

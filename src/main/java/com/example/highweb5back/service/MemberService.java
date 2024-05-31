@@ -46,7 +46,7 @@ public class MemberService {
         List<Member> membersAfterSpecificTime = memberRepository.findByTypeAndLastLoginAfter(Type.CLIENT, lastLogin);
         return (long) membersAfterSpecificTime.size();
     }
-    public String loginCounselor(){
+    public Long loginCounselor(){
         Member counselor;
         List<Member> counselorOp = memberRepository.findByType(Type.COUNSELOR);
         if(counselorOp.isEmpty()){
@@ -56,7 +56,7 @@ public class MemberService {
         }
         counselor.setLastLogin(LocalDateTime.now());
         memberRepository.save(counselor);
-        return "상담사 로그인 완료";
+        return counselor.getId();
     }
 
     public Long makeClient(){
